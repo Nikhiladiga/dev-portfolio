@@ -72,16 +72,6 @@ const Landing = () => {
             <Download className="mr-2 h-5 w-5" />
             Download Resume
           </Button>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <button
-              onClick={scrollToNext}
-              className="animate-bounce text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              <ChevronDown className="h-8 w-8" />
-            </button>
-          </div>
         </div>
       </div>
     </section>

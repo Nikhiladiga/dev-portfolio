@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Heart, ArrowUp } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
@@ -9,7 +9,6 @@ const Footer = () => {
       href: "https://in.linkedin.com/in/nikhil-adiga-493bb0183",
       label: "LinkedIn",
     },
-    { icon: Mail, href: "mailto:john@example.com", label: "Email" },
   ];
 
   const scrollToTop = () => {
@@ -27,13 +26,20 @@ const Footer = () => {
               return (
                 <Button
                   key={index}
+                  asChild
                   variant="ghost"
                   size="icon"
                   className="hover:bg-blue-500/20 hover:text-blue-400 transition-all duration-300 hover:scale-110"
-                  onClick={() => window.open(link.href, "_blank")}
                   title={link.label}
                 >
-                  <Icon className="h-5 w-5" />
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
                 </Button>
               );
             })}
@@ -54,7 +60,7 @@ const Footer = () => {
           <div className="border-t border-gray-700 pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between">
               <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                © 2024 Nikhil Adiga. Built with{" "}
+                2024 Nikhil Adiga. Built with{" "}
                 <Heart className="inline h-4 w-4 text-red-400 mx-1" />
                 using React & Vite
               </p>

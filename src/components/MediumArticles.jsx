@@ -156,10 +156,17 @@ const MediumArticles = () => {
                 <Button
                   variant="outline"
                   className="w-full group-hover:bg-purple-500/20 group-hover:border-purple-400 transition-all duration-300"
-                  onClick={() => window.open(article.link, "_blank")}
+                  asChild
                 >
-                  Read Article
-                  <ExternalLink className="ml-2 h-4 w-4" />
+                  <a
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center"
+                  >
+                    Read Article
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -167,15 +174,16 @@ const MediumArticles = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button
-            variant="futuristic"
-            size="lg"
-            onClick={() =>
-              window.open("https://medium.com/@nikhiladigaz", "_blank")
-            }
-          >
-            View All Articles on Medium
-            <ExternalLink className="ml-2 h-5 w-5" />
+          <Button variant="futuristic" size="lg" asChild>
+            <a
+              href="https://medium.com/@nikhiladigaz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center"
+            >
+              View All Articles on Medium
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </a>
           </Button>
         </div>
       </div>

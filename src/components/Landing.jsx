@@ -1,22 +1,15 @@
 import { Button } from "./ui/button.jsx";
-import { Download, ChevronDown } from "lucide-react";
+import { Download } from "lucide-react";
 import nikhil from "../assets/nikhil.png";
 
 const Landing = () => {
   const handleDownloadResume = () => {
     const link = document.createElement("a");
-    link.href = "/resume.pdf";
+    link.href = "/dev-portfolio/resume.pdf";
     link.download = "Nikhil_Adiga_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
-
-  const scrollToNext = () => {
-    const nextSection = document.getElementById("techstack");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   return (

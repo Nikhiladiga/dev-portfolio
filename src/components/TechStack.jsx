@@ -12,7 +12,6 @@ import {
   SiMongodb,
   SiPostgresql,
   SiRedis,
-  SiGraphql,
   SiNextdotjs,
   SiExpress,
   SiSpringboot,
@@ -55,11 +54,6 @@ const TechStack = () => {
       color: "from-green-500 to-green-600",
     },
     { name: "Redis", icon: <SiRedis />, color: "from-red-500 to-red-600" },
-    {
-      name: "GraphQL",
-      icon: <SiGraphql />,
-      color: "from-pink-500 to-purple-500",
-    },
     {
       name: "Next.js",
       icon: <SiNextdotjs />,

@@ -221,7 +221,9 @@ const Projects = () => {
           <Button
             variant="futuristic"
             size="lg"
-            onClick={() => window.open("https://github.com/johndoe", "_blank")}
+            onClick={() =>
+              window.open("https://github.com/Nikhiladiga", "_blank")
+            }
           >
             View All Projects on GitHub
             <Github className="ml-2 h-5 w-5" />

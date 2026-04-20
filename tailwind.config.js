@@ -73,18 +73,13 @@ export default {
         "slide-in": {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(0)" },
-        },
-        "glow": {
-          "0%, 100%": { boxShadow: "0 0 5px #3b82f6" },
-          "50%": { boxShadow: "0 0 20px #3b82f6, 0 0 30px #3b82f6" },
-        },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out",
-        "slide-in": "slide-in 0.8s ease-out",
-        "glow": "glow 2s ease-in-out infinite alternate",
+        "slide-in": "slide-in 0.8s ease-out"
       },
     },
   },

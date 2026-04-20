@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button.jsx";
-import { Menu, X, Home, Code, BookOpen, FolderOpen } from "lucide-react";
+import { Menu, X, Home, Code, BookOpen, FolderOpen, GitPullRequest, FileText } from "lucide-react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,8 +9,10 @@ const Navigation = () => {
   const navItems = [
     { id: "landing", label: "Home", icon: Home },
     { id: "techstack", label: "Tech Stack", icon: Code },
-    { id: "articles", label: "Articles", icon: BookOpen },
     { id: "projects", label: "Projects", icon: FolderOpen },
+    { id: "opensource", label: "Open Source", icon: GitPullRequest },
+    { id: "patents", label: "Patents", icon: FileText },
+    { id: "articles", label: "Articles", icon: BookOpen },
   ];
 
   useEffect(() => {
@@ -47,10 +49,10 @@ const Navigation = () => {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-blue-500/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-white/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <div className="text-xl font-bold text-white">
               Nikhil Adiga
             </div>
 
@@ -64,12 +66,12 @@ const Navigation = () => {
                     onClick={() => scrollToSection(item.id)}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
                       activeSection === item.id
-                        ? "text-blue-400 bg-blue-500/20"
-                        : "text-gray-300 hover:text-blue-400 hover:bg-blue-500/10"
+                        ? "text-[#146FE1] bg-[#146FE1]/10"
+                        : "text-gray-400 hover:text-[#146FE1] hover:bg-[#146FE1]/5"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
-                    <span>{item.label}</span>
+                    <span className="text-sm font-medium">{item.label}</span>
                   </button>
                 );
               })}
@@ -96,10 +98,10 @@ const Navigation = () => {
       {isOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/80"
             onClick={() => setIsOpen(false)}
           />
-          <div className="fixed top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-blue-500/20">
+          <div className="fixed top-16 left-0 right-0 bg-background border-b border-white/10">
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => {
@@ -110,12 +112,12 @@ const Navigation = () => {
                       onClick={() => scrollToSection(item.id)}
                       className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                         activeSection === item.id
-                          ? "text-blue-400 bg-blue-500/20"
-                          : "text-gray-300 hover:text-blue-400 hover:bg-blue-500/10"
+                          ? "text-[#146FE1] bg-[#146FE1]/10"
+                          : "text-gray-400 hover:text-[#146FE1] hover:bg-[#146FE1]/5"
                       }`}
                     >
                       <Icon className="h-5 w-5" />
-                      <span className="text-lg">{item.label}</span>
+                      <span className="text-lg font-medium">{item.label}</span>
                     </button>
                   );
                 })}
@@ -134,8 +136,8 @@ const Navigation = () => {
               onClick={() => scrollToSection(item.id)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 activeSection === item.id
-                  ? "bg-blue-400 scale-125"
-                  : "bg-gray-600 hover:bg-blue-400/60"
+                  ? "bg-[#146FE1] scale-125 shadow-[0_0_10px_#146FE1]"
+                  : "bg-gray-600 hover:bg-[#146FE1]/60"
               }`}
               title={item.label}
             />

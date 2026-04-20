@@ -15,41 +15,33 @@ const Landing = () => {
   return (
     <section
       id="landing"
-      className="min-h-screen flex items-center justify-center futuristic-bg tech-grid relative overflow-hidden pt-24 md:pt-0"
+      className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden pt-24 md:pt-0"
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl animate-ping"></div>
-      </div>
-
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="animate-fade-in">
           {/* Profile Image */}
           <div className="mb-8 flex justify-center">
             <div className="relative">
-              <div className="w-48 h-48 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-glow">
+              <div className="w-48 h-48 rounded-full border border-white/20 p-1">
                 <img
                   src={nikhil}
                   alt="Profile"
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover opacity-90 transition-transform duration-500 hover:scale-105"
                 />
               </div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-600/20 blur-xl"></div>
             </div>
           </div>
 
           {/* Name and Title */}
-          <h1 className="text-6xl md:text-8xl font-bold mb-4 text-glow bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-8xl font-bold mb-4 text-white tracking-tight">
             Nikhil Adiga
           </h1>
-          <h2 className="text-2xl md:text-4xl text-blue-300 mb-8 font-light tracking-wide">
+          <h2 className="text-2xl md:text-4xl text-gray-300 mb-8 font-light tracking-wide">
             Software Engineer
           </h2>
 
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
             Crafting the future through code. Passionate about building
             innovative solutions that bridge the gap between imagination and
             reality.
@@ -58,9 +50,9 @@ const Landing = () => {
           {/* CTA Button */}
           <Button
             onClick={handleDownloadResume}
-            variant="futuristic"
+            variant="outline"
             size="lg"
-            className="text-lg px-8 py-4 mb-16"
+            className="text-lg px-8 py-6 mb-16 rounded-none border border-white/20 text-gray-300 hover:bg-[#146FE1] hover:border-[#146FE1] hover:text-white transition-all duration-300"
           >
             <Download className="mr-2 h-5 w-5" />
             Download Resume

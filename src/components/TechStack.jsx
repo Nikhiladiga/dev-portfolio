@@ -1,11 +1,12 @@
 import {
   FaReact,
-  FaJs,
   FaNodeJs,
   FaDocker,
   FaAws,
   FaGitAlt,
   FaJava,
+  FaPython,
+  FaRobot,
 } from "react-icons/fa";
 import {
   SiTypescript,
@@ -15,113 +16,57 @@ import {
   SiNextdotjs,
   SiExpress,
   SiSpringboot,
+  SiAstro,
+  SiClaude,
+  SiRabbitmq,
 } from "react-icons/si";
 
 const TechStack = () => {
   const technologies = [
-    { name: "React", icon: <FaReact />, color: "from-blue-400 to-cyan-400" },
-    {
-      name: "JavaScript",
-      icon: <FaJs />,
-      color: "from-yellow-400 to-orange-400",
-    },
-    {
-      name: "TypeScript",
-      icon: <SiTypescript />,
-      color: "from-blue-500 to-blue-600",
-    },
-    {
-      name: "Node.js",
-      icon: <FaNodeJs />,
-      color: "from-green-400 to-green-500",
-    },
-    { name: "Java", icon: <FaJava />, color: "from-red-500 to-red-600" },
-    {
-      name: "Spring Boot",
-      icon: <SiSpringboot />,
-      color: "from-green-500 to-green-600",
-    },
-    { name: "Docker", icon: <FaDocker />, color: "from-blue-500 to-cyan-500" },
-    { name: "AWS", icon: <FaAws />, color: "from-orange-400 to-yellow-400" },
-    {
-      name: "PostgreSQL",
-      icon: <SiPostgresql />,
-      color: "from-blue-600 to-indigo-600",
-    },
-    {
-      name: "MongoDB",
-      icon: <SiMongodb />,
-      color: "from-green-500 to-green-600",
-    },
-    { name: "Redis", icon: <SiRedis />, color: "from-red-500 to-red-600" },
-    {
-      name: "Next.js",
-      icon: <SiNextdotjs />,
-      color: "from-gray-700 to-gray-900",
-    },
-    {
-      name: "Express",
-      icon: <SiExpress />,
-      color: "from-gray-600 to-gray-700",
-    },
-    { name: "Git", icon: <FaGitAlt />, color: "from-orange-500 to-red-500" },
+    { name: "React", icon: <FaReact />, hoverColor: "group-hover:text-[#61DAFB]" },
+    { name: "TypeScript", icon: <SiTypescript />, hoverColor: "group-hover:text-[#3178C6]" },
+    { name: "Python", icon: <FaPython />, hoverColor: "group-hover:text-[#3776AB]" },
+    { name: "Node.js", icon: <FaNodeJs />, hoverColor: "group-hover:text-[#339933]" },
+    { name: "Java", icon: <FaJava />, hoverColor: "group-hover:text-[#007396]" },
+    { name: "Spring Boot", icon: <SiSpringboot />, hoverColor: "group-hover:text-[#6DB33F]" },
+    { name: "Astro", icon: <SiAstro />, hoverColor: "group-hover:text-[#FF5D01]" },
+    { name: "Claude Code", icon: <SiClaude />, hoverColor: "group-hover:text-[#D8C2AD]" },
+    { name: "Antigravity", icon: <FaRobot />, hoverColor: "group-hover:text-[#4285F4]" },
+    { name: "Docker", icon: <FaDocker />, hoverColor: "group-hover:text-[#2496ED]" },
+    { name: "AWS", icon: <FaAws />, hoverColor: "group-hover:text-[#FF9900]" },
+    { name: "PostgreSQL", icon: <SiPostgresql />, hoverColor: "group-hover:text-[#4169E1]" },
+    { name: "MongoDB", icon: <SiMongodb />, hoverColor: "group-hover:text-[#47A248]" },
+    { name: "Redis", icon: <SiRedis />, hoverColor: "group-hover:text-[#DC382D]" },
+    { name: "Next.js", icon: <SiNextdotjs />, hoverColor: "group-hover:text-white" },
+    { name: "Express", icon: <SiExpress />, hoverColor: "group-hover:text-white" },
+    { name: "Git", icon: <FaGitAlt />, hoverColor: "group-hover:text-[#F05032]" },
+    { name: "RabbitMQ", icon: <SiRabbitmq />, hoverColor: "group-hover:text-[#FF6600]" },
   ];
 
   return (
-    <section
-      id="techstack"
-      className="py-20 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20"
-    >
+    <section id="techstack" className="py-20 bg-background border-t border-white/10">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-glow bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white tracking-tight">
             Tech Stack
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light">
             Technologies and tools I use to bring ideas to life
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-          {technologies.map((tech, index) => (
-            <div
-              key={tech.name}
-              className="group relative"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="bg-card/50 backdrop-blur-sm border border-blue-500/20 rounded-xl p-6 text-center hover:border-blue-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+          {technologies.map((tech) => (
+            <div key={tech.name} className="group relative">
+              <div className="bg-transparent border border-white/10 rounded-none p-6 text-center transition-all duration-300 hover:border-[#146FE1]/50 hover:bg-[#146FE1]/5 flex flex-col items-center justify-center min-h-[120px] hover:-translate-y-1">
+                <div className={`text-3xl mb-3 text-gray-400 ${tech.hoverColor} transition-colors duration-300`}>
                   {tech.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-2">
+                <h3 className={`text-xs font-medium text-gray-500 ${tech.hoverColor} tracking-wider uppercase transition-colors duration-300`}>
                   {tech.name}
                 </h3>
-                <div
-                  className={`h-1 w-full bg-gradient-to-r ${tech.color} rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300`}
-                ></div>
               </div>
-
-              {/* Glow effect on hover */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-r ${tech.color} rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10`}
-              ></div>
             </div>
-          ))}
-        </div>
-
-        {/* Floating particles effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-ping"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            ></div>
           ))}
         </div>
       </div>

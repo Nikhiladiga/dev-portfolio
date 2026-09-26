@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../../lib/types";
+import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 import Star from "../ui/Star.astro";
 
 interface Props {
@@ -44,12 +45,12 @@ const { projects } = Astro.props;
           )}
 
           <div class="mt-auto flex flex-wrap gap-4 pt-8 font-head font-bold">
-            <a href={project.repositoryUrl} target="_blank" rel="noreferrer" class="underline decoration-2 underline-offset-4 hover:bg-primary hover:text-primary-foreground">
-              GitHub ↗<span class="sr-only"> for {project.title}</span>
+            <a href={project.repositoryUrl} target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 underline decoration-2 underline-offset-4 hover:bg-primary hover:text-primary-foreground">
+              GitHub <ExternalLinkIcon /><span class="sr-only"> for {project.title}</span>
             </a>
             {project.demoUrl && (
-              <a href={project.demoUrl} target="_blank" rel="noreferrer" class="underline decoration-2 underline-offset-4 hover:bg-primary hover:text-primary-foreground">
-                {project.demoUrl.includes("npmjs.com") ? "npm ↗" : "Live demo ↗"}<span class="sr-only"> for {project.title}</span>
+              <a href={project.demoUrl} target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 underline decoration-2 underline-offset-4 hover:bg-primary hover:text-primary-foreground">
+                {project.demoUrl.includes("npmjs.com") ? "npm" : "Live demo"} <ExternalLinkIcon /><span class="sr-only"> for {project.title}</span>
               </a>
             )}
           </div>

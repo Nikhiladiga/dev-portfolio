@@ -1,5 +1,6 @@
 ---
 import type { OpenSourceWork } from "../../lib/types";
+import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 
 interface Props {
   work: OpenSourceWork[];
@@ -25,8 +26,8 @@ const { work } = Astro.props;
           </div>
           <h3 class="mt-8 font-display text-4xl uppercase sm:text-5xl">{item.title}</h3>
           <p class="prose-width mt-4 text-lg text-muted-foreground">{item.description}</p>
-          <a href={item.url} target="_blank" rel="noreferrer" class="mt-7 inline-flex font-head font-bold underline decoration-2 underline-offset-4 group-hover:bg-primary group-hover:text-primary-foreground">
-            View {item.title} on GitHub ↗
+          <a href={item.url} target="_blank" rel="noreferrer" class="mt-7 inline-flex items-center gap-1 font-head font-bold underline decoration-2 underline-offset-4 group-hover:bg-primary group-hover:text-primary-foreground">
+            View {item.title} on GitHub <ExternalLinkIcon />
           </a>
         </article>
       ))}

@@ -4,24 +4,39 @@ import { describe, expect, it } from "vitest";
 const root = new URL("../../", import.meta.url);
 
 describe("Cloudflare deployment contract", () => {
-  it("uses the claimed Workers project and static asset output", () => {
+  it("targets the existing Pages project and static output", () => {
     const wrangler = JSON.parse(
       readFileSync(new URL("wrangler.jsonc", root), "utf8"),
     );
     expect(wrangler.name).toBe("nikhiladiga");
-    expect(wrangler.assets.directory).toBe("./dist");
-    expect(wrangler.assets.not_found_handling).toBe("404-page");
+    expect(wrangler.pages_build_output_dir).toBe("./dist");
+    expect(wrangler).not.toHaveProperty("assets");
   });
 
-  it("deploys through Wrangler and never through GitHub Pages", () => {
+  it("uploads to Cloudflare Pages instead of creating a Worker", () => {
     const workflow = readFileSync(
       new URL(".github/workflows/refresh-content.yml", root),
       "utf8",
     );
     expect(workflow).toContain("cloudflare/wrangler-action@v4");
-    expect(workflow).toContain("command: deploy");
+    expect(workflow).toContain("deployments: write");
+    expect(workflow).toContain(
+      "command: pages deploy dist --project-name nikhiladiga --branch ${{ github.head_ref || github.ref_name }}",
+    );
+    expect(workflow).toContain("gitHubToken: ${{ secrets.GITHUB_TOKEN }}");
+    expect(workflow).not.toMatch(/^\s+command: deploy\s*$/m);
     expect(workflow).not.toContain("gh-pages");
     expect(existsSync(new URL(".github/workflows/deploy.yml", root))).toBe(false);
+  });
+
+  it("uses the Pages command for manual deployments", () => {
+    const packageJson = JSON.parse(
+      readFileSync(new URL("package.json", root), "utf8"),
+    );
+    expect(packageJson.scripts.deploy).toContain(
+      "wrangler pages deploy dist --project-name nikhiladiga",
+    );
+    expect(packageJson.scripts.deploy).not.toContain("wrangler deploy");
   });
 
   it("ships baseline security headers", () => {

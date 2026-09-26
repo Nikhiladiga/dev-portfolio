@@ -1,5 +1,6 @@
 ---
 import type { Article } from "../../lib/types";
+import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 
 interface Props {
   articles: Article[];
@@ -32,7 +33,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en", { day: "2-digit
                 {article.readingMinutes && <span>{article.readingMinutes} min read</span>}
               </span>
             </span>
-            <span class="font-display text-3xl transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+            <ExternalLinkIcon class="size-7 transition-transform group-hover:translate-x-1" size={28} />
             <span class="sr-only">Read on Medium</span>
           </a>
         </li>

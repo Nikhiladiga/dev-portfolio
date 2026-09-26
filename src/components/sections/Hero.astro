@@ -1,5 +1,6 @@
 ---
 import type { PROFILE } from "../../data/profile";
+import DownloadIcon from "../ui/DownloadIcon.astro";
 import Star from "../ui/Star.astro";
 
 interface Props {
@@ -16,7 +17,7 @@ const { profile } = Astro.props;
         <span class="border-[length:var(--border-width)] border-border bg-primary px-3 py-1 font-mono text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-sm">
           {profile.role}
         </span>
-        <span class="font-mono text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">Bengaluru · India</span>
+        <span class="font-mono text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">Udupi · India</span>
       </div>
 
       <h1 id="hero-title" class="max-w-[9ch] font-display text-[clamp(4rem,12vw,9.5rem)] leading-[0.82] uppercase tracking-[-0.075em]">
@@ -37,9 +38,9 @@ const { profile } = Astro.props;
         </a>
         <a
           href={profile.links.resume}
-          class="inline-flex min-h-12 items-center border-[length:var(--border-width)] border-border bg-card px-5 py-2 font-head font-bold shadow-md transition-[transform,box-shadow] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-muted hover:shadow-lg active:translate-x-[5px] active:translate-y-[5px] active:shadow-none"
+          class="inline-flex min-h-12 items-center gap-1.5 border-[length:var(--border-width)] border-border bg-card px-5 py-2 font-head font-bold shadow-md transition-[transform,box-shadow] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-muted hover:shadow-lg active:translate-x-[5px] active:translate-y-[5px] active:shadow-none"
         >
-          Read résumé ↗
+          Read résumé <DownloadIcon />
         </a>
       </div>
     </div>

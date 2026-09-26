@@ -1,6 +1,7 @@
 ---
 import type { PROFILE, NAV_ITEMS } from "../../data/profile";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import DownloadIcon from "../ui/DownloadIcon.astro";
 
 interface Props {
   profile: typeof PROFILE;
@@ -34,9 +35,9 @@ const { profile, items } = Astro.props;
     <div class="order-2 ml-auto flex shrink-0 items-center gap-3 md:order-3">
       <a
         href={profile.links.resume}
-        class="hidden min-h-11 items-center font-mono text-xs font-bold uppercase underline decoration-2 underline-offset-4 hover:bg-muted sm:inline-flex"
+        class="hidden min-h-11 items-center gap-1.5 font-mono text-xs font-bold uppercase underline decoration-2 underline-offset-4 hover:bg-muted sm:inline-flex"
       >
-        Résumé ↗
+        Résumé <DownloadIcon />
       </a>
       <ThemeToggle client:load />
     </div>

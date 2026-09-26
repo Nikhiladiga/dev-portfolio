@@ -28,6 +28,15 @@ it("contains complete portfolio content in raw HTML", () => {
     expect(html).toContain(repo);
   }
   expect(html).toContain("https://www.npmjs.com/package/react-wsx");
+  expect(html).toContain("https://www.npmjs.com/package/create-typesense-app");
+  expect(html).toContain("Udupi · India");
+  expect(html).not.toContain("Bengaluru · India");
+});
+
+it("uses SVG icons instead of the emoji-like external-link glyph", () => {
+  const $ = load(html);
+  expect(html).not.toContain("↗");
+  expect($("svg[data-external-link-icon]").length).toBeGreaterThan(0);
 });
 
 it("serves an optimized profile portrait", () => {

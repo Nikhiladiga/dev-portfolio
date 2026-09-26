@@ -1,5 +1,7 @@
 ---
 import type { PROFILE } from "../../data/profile";
+import DownloadIcon from "../ui/DownloadIcon.astro";
+import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 
 interface Props {
   profile: typeof PROFILE;
@@ -25,7 +27,9 @@ const links = [
       <nav aria-label="Contact links" class="grid grid-cols-2 border-l-[length:var(--border-width)] border-t-[length:var(--border-width)] border-black">
         {links.map((link) => (
           <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noreferrer" : undefined} class="grid min-h-16 place-items-center border-b-[length:var(--border-width)] border-r-[length:var(--border-width)] border-black px-3 font-head font-bold text-black hover:bg-black hover:text-white">
-            {link.label} {link.href.startsWith("http") ? "↗" : "↓"}
+            <span class="inline-flex items-center gap-1.5">
+              {link.label} {link.href.startsWith("http") ? <ExternalLinkIcon /> : <DownloadIcon />}
+            </span>
           </a>
         ))}
       </nav>

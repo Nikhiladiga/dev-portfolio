@@ -5,6 +5,7 @@
     "description": "A CLI that scaffolds a complete typo-tolerant search UI with Next.js, React InstantSearch, Typesense, Docker, and seeded sample data.",
     "repository": "create-typesense-app",
     "repositoryUrl": "https://github.com/Nikhiladiga/create-typesense-app",
+    "demoUrl": "https://www.npmjs.com/package/create-typesense-app",
     "technologies": ["TypeScript", "Next.js", "Typesense", "Docker"],
     "order": 1,
     "showStats": true

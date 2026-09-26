@@ -1,5 +1,6 @@
 ---
 import type { Patent } from "../../lib/types";
+import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 import Star from "../ui/Star.astro";
 
 interface Props {
@@ -24,8 +25,8 @@ const patent = patents[0];
         <div>
           <h2 id="patent-title" class="font-display text-4xl uppercase leading-[0.95] sm:text-6xl">{patent.title}</h2>
           <p class="prose-width mt-7 text-lg text-background/75">{patent.description}</p>
-          <a href={patent.url} target="_blank" rel="noreferrer" class="mt-8 inline-flex min-h-12 items-center border-[length:var(--border-width)] border-background bg-primary px-5 py-2 font-head font-bold text-primary-foreground shadow-[5px_5px_0_var(--paper)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5">
-            Read on Google Patents ↗
+          <a href={patent.url} target="_blank" rel="noreferrer" class="mt-8 inline-flex min-h-12 items-center gap-1.5 border-[length:var(--border-width)] border-background bg-primary px-5 py-2 font-head font-bold text-primary-foreground shadow-[5px_5px_0_var(--paper)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5">
+            Read on Google Patents <ExternalLinkIcon />
           </a>
         </div>
       </div>

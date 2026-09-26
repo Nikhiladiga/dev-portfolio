@@ -46,6 +46,8 @@ describe("content schemas", () => {
 
   it("contains only the approved repositories", () => {
     expect(PROJECT_ALLOWLIST).toEqual([
+      "create-typesense-app",
+      "react-wsx",
       "google-street-view-clone",
       "ios-http-server",
       "react-speedtest",

@@ -1,0 +1,44 @@
+---
+import type { PROFILE, NAV_ITEMS } from "../../data/profile";
+import { ThemeToggle } from "../ui/ThemeToggle";
+
+interface Props {
+  profile: typeof PROFILE;
+  items: typeof NAV_ITEMS;
+}
+
+const { profile, items } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 border-b-[length:var(--border-width)] border-border bg-background/95 backdrop-blur-sm">
+  <nav class="site-container flex flex-wrap items-center gap-x-3 gap-y-2 py-3" aria-label="Primary navigation">
+    <a
+      href="#home"
+      class="flex min-h-11 shrink-0 items-center border-[length:var(--border-width)] border-border bg-primary px-3 font-display text-xl leading-none text-primary-foreground shadow-sm transition-transform hover:-translate-y-0.5"
+      aria-label={`NA — ${profile.name}, back to top`}
+    >
+      NA<span class="sr-only"> — {profile.name}</span>
+    </a>
+
+    <div class="order-3 flex basis-full flex-wrap items-center gap-x-1 gap-y-1 md:order-2 md:basis-auto md:flex-1" aria-label="Page sections">
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class="min-h-11 px-2 py-2 font-head text-sm font-bold underline-offset-4 hover:bg-muted hover:underline"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="order-2 ml-auto flex shrink-0 items-center gap-3 md:order-3">
+      <a
+        href={profile.links.resume}
+        class="hidden min-h-11 items-center font-mono text-xs font-bold uppercase underline decoration-2 underline-offset-4 hover:bg-muted sm:inline-flex"
+      >
+        Résumé ↗
+      </a>
+      <ThemeToggle client:load />
+    </div>
+  </nav>
+</header>

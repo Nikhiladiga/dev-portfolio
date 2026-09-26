@@ -1,0 +1,42 @@
+---
+import type { Article } from "../../lib/types";
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+const formatDate = (date: Date) => new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(date);
+---
+
+<section id="writing" aria-labelledby="writing-title" class="scroll-mt-36 border-b-[length:var(--border-width)] border-border py-20 sm:py-28">
+  <div class="site-container">
+    <div class="mb-10 grid gap-5 md:grid-cols-[1fr_1fr] md:items-end">
+      <div>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">05 / Notes from the work</p>
+        <h2 id="writing-title" class="mt-2 font-display text-5xl uppercase leading-none sm:text-7xl">Writing</h2>
+      </div>
+      <p class="prose-width text-lg text-muted-foreground md:justify-self-end">Practical notes on AI interfaces, infrastructure, developer workflows, and things worth building twice.</p>
+    </div>
+
+    <ol class="border-t-[length:var(--border-width)] border-border">
+      {articles.map((article, index) => (
+        <li class="border-b-[length:var(--border-width)] border-border">
+          <a href={article.url} target="_blank" rel="noreferrer" class="group grid min-h-32 gap-4 py-6 transition-colors hover:bg-muted sm:grid-cols-[4rem_minmax(0,1fr)_auto] sm:items-center sm:px-4">
+            <span class="font-mono text-xs font-bold text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+            <span>
+              <span class="block font-head text-xl font-bold leading-tight sm:text-2xl">{article.title}</span>
+              <span class="mt-3 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.65rem] font-bold uppercase text-muted-foreground">
+                <time datetime={article.pubDate.toISOString()}>{formatDate(article.pubDate)}</time>
+                {article.tags.slice(0, 3).map((tag) => <span>#{tag}</span>)}
+                {article.readingMinutes && <span>{article.readingMinutes} min read</span>}
+              </span>
+            </span>
+            <span class="font-display text-3xl transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+            <span class="sr-only">Read on Medium</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

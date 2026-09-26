@@ -1,0 +1,37 @@
+---
+interface Props {
+  stack: readonly string[];
+  tooling: readonly string[];
+}
+
+const { stack, tooling } = Astro.props;
+---
+
+<section id="stack" aria-labelledby="stack-title" class="scroll-mt-36 border-b-[length:var(--border-width)] border-border py-20 sm:py-28">
+  <div class="site-container">
+    <div class="mb-10 grid gap-5 md:grid-cols-[1fr_1.35fr] md:items-end">
+      <div>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">01 / Capabilities</p>
+        <h2 id="stack-title" class="mt-2 font-display text-5xl uppercase leading-none sm:text-7xl">Stack</h2>
+      </div>
+      <p class="prose-width text-lg text-muted-foreground md:justify-self-end">
+        Technologies I use to move ideas from a useful prototype to dependable production software.
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-2 border-l-[length:var(--border-width)] border-t-[length:var(--border-width)] border-border sm:grid-cols-3 lg:grid-cols-4">
+      {stack.map((item, index) => (
+        <li class:list={["grid min-h-28 place-items-center border-b-[length:var(--border-width)] border-r-[length:var(--border-width)] border-border p-4 text-center font-head text-lg font-bold sm:min-h-32 sm:text-xl", index % 6 === 0 && "bg-primary text-primary-foreground", index % 6 === 3 && "bg-foreground text-background"]}>
+          {item}
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-8 grid gap-0 border-[length:var(--border-width)] border-border bg-card md:grid-cols-[14rem_1fr]">
+      <h3 class="grid min-h-24 place-items-center border-b-[length:var(--border-width)] border-border bg-muted px-5 font-display text-2xl uppercase md:border-b-0 md:border-r-[length:var(--border-width)]">Tooling</h3>
+      <ul class="flex flex-wrap items-center gap-x-7 gap-y-3 px-6 py-6">
+        {tooling.map((item) => <li class="font-mono text-sm font-bold before:mr-2 before:text-primary before:content-['✦']">{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

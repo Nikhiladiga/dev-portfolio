@@ -1,0 +1,71 @@
+---
+import { PROFILE } from "../data/profile";
+import { absoluteUrl } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const site = Astro.site ?? new URL("https://nikhiladiga.pages.dev");
+const canonical = new URL(Astro.url.pathname, site);
+const socialImage = absoluteUrl("/og.png", site);
+const personId = absoluteUrl("/#person", site);
+const websiteId = absoluteUrl("/#website", site);
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: PROFILE.name,
+      jobTitle: PROFILE.role,
+      url: site.href,
+      image: absoluteUrl(PROFILE.portrait, site),
+      sameAs: [
+        PROFILE.links.github,
+        PROFILE.links.linkedin,
+        PROFILE.links.medium,
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: `${PROFILE.name} — ${PROFILE.role}`,
+      url: site.href,
+      author: { "@id": personId },
+    },
+  ],
+}).replace(/</g, "\\u003c");
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${PROFILE.name} articles`}
+  href={absoluteUrl("/rss.xml", site)}
+/>
+<link
+  rel="sitemap"
+  type="application/xml"
+  href={absoluteUrl("/sitemap-index.xml", site)}
+/>
+<meta name="theme-color" content="#04d9ff" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${PROFILE.name}, ${PROFILE.role}`} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />
+<script type="application/ld+json" set:html={structuredData} />

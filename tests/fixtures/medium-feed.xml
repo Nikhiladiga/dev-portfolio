@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nikhil Adiga</title>
+    <item>
+      <guid isPermaLink="false">safe-article-id</guid>
+      <title><![CDATA[A safe article]]></title>
+      <link>https://nikhiladigaz.medium.com/a-safe-article-123456789abc</link>
+      <pubDate>Sun, 06 Sep 2026 10:00:00 GMT</pubDate>
+      <category>Astro</category>
+      <category>Testing</category>
+      <content:encoded><![CDATA[<p>This is enough readable text to calculate a reading time.</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

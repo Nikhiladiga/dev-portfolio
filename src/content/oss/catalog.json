@@ -1,0 +1,18 @@
+[
+  {
+    "id": "typesense",
+    "title": "Typesense",
+    "role": "Contributor",
+    "description": "Contributed to Typesense, an open source, typo-tolerant search engine that is optimized for instant sub-50ms searches.",
+    "url": "https://github.com/typesense/typesense",
+    "order": 1
+  },
+  {
+    "id": "ministack",
+    "title": "Ministack",
+    "role": "Contributor",
+    "description": "Contributed to Ministack, an open-source alternative to LocalStack for running AWS services locally.",
+    "url": "https://github.com/ministackorg/ministack",
+    "order": 2
+  }
+]

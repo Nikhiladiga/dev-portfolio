@@ -1,0 +1,37 @@
+[
+  {
+    "id": "local-cloud-gaming-laptop",
+    "title": "I Turned My Old Gaming Laptop Into a Local Cloud for My MacBook",
+    "url": "https://nikhiladigaz.medium.com/i-turned-my-old-gaming-laptop-into-a-local-cloud-for-my-macbook-7fc4e0018916",
+    "pubDate": "2026-09-06",
+    "tags": ["Cloud", "Homelab"]
+  },
+  {
+    "id": "goodbye-docker",
+    "title": "Goodbye Docker*",
+    "url": "https://nikhiladigaz.medium.com/goodbye-docker-c70415a4b144",
+    "pubDate": "2026-07-03",
+    "tags": ["Docker", "Containers"]
+  },
+  {
+    "id": "agentic-uis-copilotkit",
+    "title": "Beyond the Chatbox: Building Agentic UIs with React and CopilotKit",
+    "url": "https://nikhiladigaz.medium.com/beyond-the-chatbox-building-agentic-uis-with-react-and-copilotkit-d168a8e7f14a",
+    "pubDate": "2026-06-27",
+    "tags": ["AI", "React", "CopilotKit"]
+  },
+  {
+    "id": "run-github-actions-locally",
+    "title": "Stop Commit-Spamming your CI: Run your GitHub Actions Locally",
+    "url": "https://nikhiladigaz.medium.com/stop-commit-spamming-your-ci-run-your-github-actions-locally-32ec837f469e",
+    "pubDate": "2026-06-06",
+    "tags": ["GitHub Actions", "CI"]
+  },
+  {
+    "id": "no-cookie-cutter-ai-designs",
+    "title": "Say NO to cookie-cutter AI designs",
+    "url": "https://nikhiladigaz.medium.com/say-no-to-cookie-cutter-ai-designs-b7782889db23",
+    "pubDate": "2026-05-09",
+    "tags": ["Design", "AI"]
+  }
+]

@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/sections/Navigation.astro";
+import Hero from "../components/sections/Hero.astro";
+import Stats from "../components/sections/Stats.astro";
+import TechStack from "../components/sections/TechStack.astro";
+import Projects from "../components/sections/Projects.astro";
+import OpenSource from "../components/sections/OpenSource.astro";
+import PatentSection from "../components/sections/Patent.astro";
+import Articles from "../components/sections/Articles.astro";
+import Footer from "../components/sections/Footer.astro";
+import { NAV_ITEMS, PROFILE, STACK, TOOLING } from "../data/profile";
+import { buildPortfolioData } from "../lib/portfolio-data";
+import type { Article, OpenSourceWork, Patent, PortfolioStats, Project } from "../lib/types";
+
+const projects = (await getCollection("projects"))
+  .map(({ id, data }) => ({ id, ...data }))
+  .sort((left, right) => left.order - right.order) satisfies Project[];
+
+const openSource = (await getCollection("oss"))
+  .map(({ id, data }) => ({ id, ...data }))
+  .sort((left, right) => left.order - right.order) satisfies OpenSourceWork[];
+
+const patents = (await getCollection("patents"))
+  .map(({ id, data }) => ({ id, ...data }))
+  .sort((left, right) => left.order - right.order) satisfies Patent[];
+
+const fallbackArticles = (await getCollection("articles"))
+  .map(({ data }) => data)
+  .sort((left, right) => right.pubDate.getTime() - left.pubDate.getTime()) satisfies Article[];
+
+const portfolio = await buildPortfolioData({
+  projects,
+  fallbackArticles,
+  fallbackPublicRepos: PROFILE.fallbackPublicRepositories,
+});
+
+const stats: PortfolioStats = {
+  publicRepositories: portfolio.publicRepos,
+  patents: patents.length,
+  openSourceProjects: openSource.length,
+  articles: portfolio.articles.length,
+};
+---
+
+<BaseLayout
+  title="Nikhil Adiga — Software Engineer"
+  description="Nikhil Adiga builds AI-powered products, developer tools, and search systems."
+>
+  <Navigation profile={PROFILE} items={NAV_ITEMS} />
+  <main>
+    <Hero profile={PROFILE} />
+    <Stats {stats} />
+    <TechStack stack={STACK} tooling={TOOLING} />
+    <Projects projects={portfolio.projects} />
+    <OpenSource work={openSource} />
+    <PatentSection {patents} />
+    <Articles articles={portfolio.articles} />
+  </main>
+  <Footer profile={PROFILE} />
+</BaseLayout>

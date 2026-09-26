@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "@fontsource/archivo-black/latin-400.css";
+@import "@fontsource/space-grotesk/latin-400.css";
+@import "@fontsource/space-grotesk/latin-500.css";
+@import "@fontsource/space-grotesk/latin-700.css";
+@import "@fontsource/space-mono/latin-400.css";
+@import "@fontsource/space-mono/latin-700.css";
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper: #f2fafc;
+  --card: #ffffff;
+  --ink: #000000;
+  --line: #000000;
+  --shadow: #000000;
+  --muted: #454545;
+  --a1: #04d9ff;
+  --a2: #ffffff;
+  --a3: #000000;
+  --a4: #cff5fe;
+  --on-a1: #000000;
+  --on-a2: #000000;
+  --on-a3: #ffffff;
+  --on-a4: #000000;
+  --border-width: 3px;
+  --shadow-offset: 5px;
+  --radius: 0;
+  --focus: #005fcc;
+  --destructive: #ff4d4d;
+  --on-destructive: #000000;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #101010;
+  --card: #1c1c1c;
+  --ink: #ffffff;
+  --line: #ffffff;
+  --shadow: #04d9ff;
+  --muted: #adadad;
+  --a1: #04d9ff;
+  --a2: #1c1c1c;
+  --a3: #ffffff;
+  --a4: #0a3d4a;
+  --on-a1: #000000;
+  --on-a2: #ffffff;
+  --on-a3: #000000;
+  --on-a4: #ffffff;
+  --focus: #04d9ff;
+  --destructive: #ff6b6b;
+  --on-destructive: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --paper: #101010;
+    --card: #1c1c1c;
+    --ink: #ffffff;
+    --line: #ffffff;
+    --shadow: #04d9ff;
+    --muted: #adadad;
+    --a1: #04d9ff;
+    --a2: #1c1c1c;
+    --a3: #ffffff;
+    --a4: #0a3d4a;
+    --on-a1: #000000;
+    --on-a2: #ffffff;
+    --on-a3: #000000;
+    --on-a4: #ffffff;
+    --focus: #04d9ff;
+  }
+}
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: var(--card);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--a1);
+  --color-primary-foreground: var(--on-a1);
+  --color-primary-hover: var(--a4);
+  --color-secondary: var(--a2);
+  --color-secondary-foreground: var(--on-a2);
+  --color-secondary-hover: var(--a4);
+  --color-muted: var(--a4);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--a1);
+  --color-accent-foreground: var(--on-a1);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--on-destructive);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--focus);
+  --font-display: "Archivo Black", sans-serif;
+  --font-head: "Space Grotesk", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --shadow-sm: 3px 3px 0 var(--shadow);
+  --shadow-md: 5px 5px 0 var(--shadow);
+  --shadow-lg: 7px 7px 0 var(--shadow);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+:where(p, a, h1, h2, h3, code) {
+  overflow-wrap: anywhere;
+}
+
+:where(button, a, summary, input, textarea, select) {
+  min-height: 44px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--a1);
+  color: var(--on-a1);
+}
+
+.site-container {
+  width: min(100% - 2rem, 76rem);
+  margin-inline: auto;
+}
+
+.prose-width {
+  max-width: 66ch;
+}
+
+.focus-on-cyan {
+  --focus: #000000;
+}
+
+.brutal-separator {
+  margin: 0;
+  border: 0;
+  border-top: var(--border-width) solid var(--line);
+}
+
+.brutal-star {
+  display: inline-grid;
+  place-items: center;
+  color: var(--a1);
+  font-family: "Archivo Black", sans-serif;
+  line-height: 1;
+  -webkit-text-stroke: 2px var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

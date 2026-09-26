@@ -1,0 +1,35 @@
+---
+import type { OpenSourceWork } from "../../lib/types";
+
+interface Props {
+  work: OpenSourceWork[];
+}
+
+const { work } = Astro.props;
+---
+
+<section id="open-source" aria-labelledby="open-source-title" class="scroll-mt-36 border-b-[length:var(--border-width)] border-border py-20 sm:py-28">
+  <div class="site-container grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+    <div>
+      <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">03 / Collaboration</p>
+      <h2 id="open-source-title" class="mt-2 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">Open<br />source</h2>
+      <p class="prose-width mt-6 text-lg text-muted-foreground">Shipping useful improvements in public, alongside maintainers and contributors.</p>
+    </div>
+
+    <div class="grid gap-6">
+      {work.map((item, index) => (
+        <article class="group border-[length:var(--border-width)] border-border bg-card p-6 shadow-md transition-[transform,box-shadow] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-lg sm:p-8">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <p class="font-mono text-xs font-bold uppercase text-muted-foreground">Contribution / {String(index + 1).padStart(2, "0")}</p>
+            <span class="border-[length:var(--border-width)] border-border bg-primary px-3 py-1 font-mono text-xs font-bold uppercase text-primary-foreground">{item.role}</span>
+          </div>
+          <h3 class="mt-8 font-display text-4xl uppercase sm:text-5xl">{item.title}</h3>
+          <p class="prose-width mt-4 text-lg text-muted-foreground">{item.description}</p>
+          <a href={item.url} target="_blank" rel="noreferrer" class="mt-7 inline-flex font-head font-bold underline decoration-2 underline-offset-4 group-hover:bg-primary group-hover:text-primary-foreground">
+            View {item.title} on GitHub ↗
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "google-street-view-clone",
+    "title": "Google Street View Clone",
+    "description": "A Google Street View clone built with React and react-photo-sphere-viewer.",
+    "repository": "google-street-view-clone",
+    "repositoryUrl": "https://github.com/Nikhiladiga/google-street-view-clone",
+    "technologies": ["React", "JavaScript", "react-photo-sphere-viewer"],
+    "order": 1,
+    "showStats": true
+  },
+  {
+    "id": "ios-http-server",
+    "title": "iOS HTTP Server",
+    "description": "A demonstration of running a lightweight HTTP server on iOS with Telegraph.",
+    "repository": "ios-http-server",
+    "repositoryUrl": "https://github.com/Nikhiladiga/ios-http-server",
+    "technologies": ["Swift", "Telegraph", "iOS"],
+    "order": 2,
+    "showStats": true
+  },
+  {
+    "id": "react-speedtest",
+    "title": "React Speedtest",
+    "description": "A browser speed test built with React and the ndt7 JavaScript client.",
+    "repository": "react-speedtest",
+    "repositoryUrl": "https://github.com/Nikhiladiga/react-speedtest",
+    "technologies": ["React", "JavaScript", "ndt7"],
+    "order": 3,
+    "showStats": true
+  },
+  {
+    "id": "webkitgtk-kiosk-app",
+    "title": "WebKitGTK Kiosk App",
+    "description": "A single-window kiosk application built with WebKitGTK and C++.",
+    "repository": "webkitgtk-kiosk-app",
+    "repositoryUrl": "https://github.com/Nikhiladiga/webkitgtk-kiosk-app",
+    "technologies": ["C++", "WebKitGTK", "Linux"],
+    "order": 4,
+    "showStats": true
+  }
+]

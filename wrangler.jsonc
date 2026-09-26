@@ -1,7 +1,10 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "nikhiladiga",
-  "pages_build_output_dir": "./dist",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
   "compatibility_date": "2026-09-26",
   "send_metrics": false
 }

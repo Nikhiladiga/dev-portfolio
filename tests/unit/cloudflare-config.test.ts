@@ -4,12 +4,13 @@ import { describe, expect, it } from "vitest";
 const root = new URL("../../", import.meta.url);
 
 describe("Cloudflare deployment contract", () => {
-  it("uses the claimed Pages project and static output", () => {
+  it("uses the claimed Workers project and static asset output", () => {
     const wrangler = JSON.parse(
       readFileSync(new URL("wrangler.jsonc", root), "utf8"),
     );
     expect(wrangler.name).toBe("nikhiladiga");
-    expect(wrangler.pages_build_output_dir).toBe("./dist");
+    expect(wrangler.assets.directory).toBe("./dist");
+    expect(wrangler.assets.not_found_handling).toBe("404-page");
   });
 
   it("deploys through Wrangler and never through GitHub Pages", () => {
@@ -18,7 +19,7 @@ describe("Cloudflare deployment contract", () => {
       "utf8",
     );
     expect(workflow).toContain("cloudflare/wrangler-action@v4");
-    expect(workflow).toContain("--project-name nikhiladiga");
+    expect(workflow).toContain("command: deploy");
     expect(workflow).not.toContain("gh-pages");
     expect(existsSync(new URL(".github/workflows/deploy.yml", root))).toBe(false);
   });

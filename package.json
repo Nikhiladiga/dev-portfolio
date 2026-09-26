@@ -11,7 +11,7 @@
     "build:site": "astro build",
     "build": "npm run check && npm run test && npm run build:site",
     "build:production": "node scripts/validate-production-env.mjs && npm run build",
-    "deploy": "npm run build:production && wrangler pages deploy dist --project-name nikhiladiga",
+    "deploy": "npm run build:production && wrangler deploy",
     "preview": "astro preview",
     "test:e2e": "playwright test",
     "content:refresh": "tsx scripts/refresh-articles.ts"

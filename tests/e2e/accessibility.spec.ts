@@ -7,6 +7,9 @@ test("the page is semantic and free of serious accessibility violations", async 
   await page.goto("/");
 
   await expect(page.locator("h1")).toHaveCount(1);
+  await expect(
+    page.locator('nav[aria-label="Primary navigation"] > a').first(),
+  ).toHaveAccessibleName(/^NA\b/);
   const targets = await page.locator('nav[aria-label="Primary navigation"] a[href^="#"]').evaluateAll((links) =>
     links.map((link) => link.getAttribute("href")).filter(Boolean),
   );
@@ -25,6 +28,26 @@ test("the page is semantic and free of serious accessibility violations", async 
     })),
   ).toEqual([]);
   await expect(page.locator('a[href="/resume.pdf"]')).not.toHaveCount(0);
+});
+
+test("the dark theme has no serious accessibility violations", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.evaluate(() => localStorage.setItem("portfolio-theme", "dark"));
+  await page.reload();
+
+  const results = await new AxeBuilder({ page }).analyze();
+  const serious = results.violations.filter(
+    (violation) =>
+      violation.impact === "serious" || violation.impact === "critical",
+  );
+  expect(
+    serious.map((violation) => ({
+      id: violation.id,
+      targets: violation.nodes.flatMap((node) => node.target),
+    })),
+  ).toEqual([]);
 });
 
 test("keyboard focus remains visible on every interactive element", async ({

@@ -49,7 +49,9 @@ const { profile } = Astro.props;
       <Star class="absolute bottom-6 right-5 rotate-12 text-7xl" />
       <div class="relative w-full max-w-sm rotate-[1.5deg] border-[length:var(--border-width)] border-black bg-white p-3 shadow-[10px_10px_0_#000]">
         <img
-          src={profile.portrait}
+          src="/nikhil-320.webp"
+          srcset={`/nikhil-320.webp 320w, ${profile.portrait} 512w`}
+          sizes="(min-width: 1024px) 320px, (min-width: 480px) 384px, 80vw"
           alt={profile.portraitAlt}
           width="640"
           height="640"

@@ -3,7 +3,7 @@ export const PROFILE = {
   role: "Software Engineer",
   statement:
     "Full-stack engineer building AI-powered products, developer tools, and search systems.",
-  portrait: "/nikhil.png",
+  portrait: "/nikhil.webp",
   portraitAlt: "Nikhil Adiga",
   fallbackPublicRepositories: 38,
   links: {

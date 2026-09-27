@@ -1,0 +1,12 @@
+[
+  {
+    "id": "profile",
+    "publicRepositories": 31,
+    "repositories": [
+      { "id": "google-street-view-clone", "stars": 7, "forks": 3, "watchers": 7 },
+      { "id": "ios-http-server", "stars": 4, "forks": 0, "watchers": 4 },
+      { "id": "react-speedtest", "stars": 3, "forks": 1, "watchers": 3 },
+      { "id": "webkitgtk-kiosk-app", "stars": 8, "forks": 1, "watchers": 8 }
+    ]
+  }
+]

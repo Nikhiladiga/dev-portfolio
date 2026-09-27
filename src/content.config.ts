@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content";
 import { file } from "astro/loaders";
 import {
   articleSchema,
+  githubSnapshotSchema,
   ossSchema,
   patentSchema,
   projectSchema,
@@ -27,4 +28,9 @@ const articles = defineCollection({
   schema: articleSchema,
 });
 
-export const collections = { projects, oss, patents, articles };
+const github = defineCollection({
+  loader: file("src/content/github/snapshot.json"),
+  schema: githubSnapshotSchema,
+});
+
+export const collections = { projects, oss, patents, articles, github };

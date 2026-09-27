@@ -1,0 +1,187 @@
+---
+interface ExperienceEntry {
+  company: string;
+  role: string;
+  dates: string;
+  startYear: string;
+  summary: string;
+  highlights: readonly string[];
+  technologies: readonly string[];
+}
+
+interface Props {
+  experience: readonly ExperienceEntry[];
+}
+
+const { experience } = Astro.props;
+---
+
+<section id="experience" aria-labelledby="experience-title" class="scroll-mt-36 border-b-[length:var(--border-width)] border-border bg-card py-20 sm:py-28">
+  <div class="site-container">
+    <div class="grid gap-5 md:grid-cols-[1fr_1fr] md:items-end">
+      <div>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">02 / Career</p>
+        <h2 id="experience-title" class="mt-2 font-display text-5xl uppercase leading-none sm:text-7xl">Experience</h2>
+      </div>
+      <div class="md:justify-self-end">
+        <p class="font-display text-2xl uppercase sm:text-3xl">2020 onward</p>
+        <p class="mt-2 max-w-[34rem] text-muted-foreground">Building search, infrastructure, AI products, and the teams behind them.</p>
+      </div>
+    </div>
+
+    <ol class="career-timeline mt-14" aria-label="Professional experience, most recent first">
+      {experience.map((entry, index) => (
+        <li class="career-entry" data-career-entry>
+          <article class="career-card border-[length:var(--border-width)] border-border bg-background p-5 shadow-md sm:p-6">
+            <div class="flex items-start justify-between gap-4">
+              <span class="grid size-9 shrink-0 place-items-center border-2 border-border bg-primary font-mono text-xs font-bold text-primary-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p class="text-right font-mono text-[0.68rem] font-bold uppercase leading-relaxed text-muted-foreground">{entry.dates}</p>
+            </div>
+
+            <h3 class="mt-6 font-display text-2xl uppercase leading-none sm:text-3xl">{entry.company}</h3>
+            <p class="mt-2 font-head font-bold text-foreground">{entry.role}</p>
+            <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{entry.summary}</p>
+
+            <ul class="mt-5 grid gap-3 border-t-2 border-border pt-4 text-sm leading-relaxed">
+              {entry.highlights.map((highlight) => (
+                <li class="grid grid-cols-[0.7rem_1fr] gap-2">
+                  <span class="mt-[0.55rem] size-2 bg-primary outline-2 outline-offset-1 outline-border" aria-hidden="true"></span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+
+            <ul class="mt-5 flex flex-wrap gap-2" aria-label={`${entry.company} technologies`}>
+              {entry.technologies.map((technology) => (
+                <li class="border-2 border-border bg-muted px-2 py-1 font-mono text-[0.62rem] font-bold uppercase">{technology}</li>
+              ))}
+            </ul>
+          </article>
+
+          <div class="career-node" aria-hidden="true">
+            <span class="career-dot"></span>
+            <span class="career-year">{entry.startYear}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .career-timeline {
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    padding-left: 2.75rem;
+  }
+
+  .career-timeline::before {
+    position: absolute;
+    inset-block: 0.75rem;
+    left: 0.625rem;
+    width: var(--border-width);
+    background: var(--line);
+    content: "";
+  }
+
+  .career-entry {
+    position: relative;
+  }
+
+  .career-card {
+    position: relative;
+  }
+
+  .career-node {
+    position: absolute;
+    top: 1.5rem;
+    left: -2.75rem;
+    display: grid;
+    justify-items: center;
+  }
+
+  .career-dot {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: var(--border-width) solid var(--line);
+    background: var(--a1);
+    box-shadow: 3px 3px 0 var(--shadow);
+  }
+
+  .career-year {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .career-timeline {
+      gap: 3rem;
+      padding: 0;
+    }
+
+    .career-timeline::before {
+      inset-block: 0.75rem;
+      left: calc(50% - (var(--border-width) / 2));
+      width: var(--border-width);
+      height: auto;
+    }
+
+    .career-entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 7rem minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .career-entry:nth-child(odd) .career-card {
+      grid-column: 1;
+    }
+
+    .career-entry:nth-child(even) .career-card {
+      grid-column: 3;
+    }
+
+    .career-entry:nth-child(odd) .career-card::after,
+    .career-entry:nth-child(even) .career-card::before {
+      position: absolute;
+      top: 1.5rem;
+      width: 3.5rem;
+      height: var(--border-width);
+      background: var(--line);
+      content: "";
+    }
+
+    .career-entry:nth-child(odd) .career-card::after {
+      right: -3.5rem;
+    }
+
+    .career-entry:nth-child(even) .career-card::before {
+      left: -3.5rem;
+    }
+
+    .career-node {
+      top: 0.75rem;
+      left: calc(50% - 0.75rem);
+      z-index: 1;
+    }
+
+    .career-year {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 0.85rem);
+      transform: translateY(-50%);
+      font-family: "Space Mono", monospace;
+      font-size: 0.625rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .career-entry:nth-child(even) .career-year {
+      right: calc(100% + 0.85rem);
+      left: auto;
+    }
+  }
+</style>

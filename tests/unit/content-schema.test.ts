@@ -1,24 +1,37 @@
 import { describe, expect, it } from "vitest";
 import {
   articleSchema,
+  githubSnapshotSchema,
   patentSchema,
   projectSchema,
 } from "../../src/content.schema";
-import { PROJECT_ALLOWLIST } from "../../src/data/project-allowlist";
 
 describe("content schemas", () => {
-  it("accepts a complete project", () => {
+  it("accepts a project without duplicated repository controls", () => {
     expect(
       projectSchema.parse({
         title: "React Speedtest",
         description: "A browser speed test built with React and ndt7.",
-        repository: "react-speedtest",
         repositoryUrl: "https://github.com/Nikhiladiga/react-speedtest",
         technologies: ["React", "JavaScript"],
-        order: 3,
-        showStats: true,
-      }).repository,
-    ).toBe("react-speedtest");
+      }),
+    ).toEqual({
+      title: "React Speedtest",
+      description: "A browser speed test built with React and ndt7.",
+      repositoryUrl: "https://github.com/Nikhiladiga/react-speedtest",
+      technologies: ["React", "JavaScript"],
+    });
+  });
+
+  it("accepts a complete GitHub snapshot", () => {
+    expect(
+      githubSnapshotSchema.parse({
+        publicRepositories: 38,
+        repositories: [
+          { id: "react-speedtest", stars: 3, forks: 1, watchers: 3 },
+        ],
+      }).publicRepositories,
+    ).toBe(38);
   });
 
   it("rejects non-HTTPS article URLs", () => {
@@ -39,19 +52,7 @@ describe("content schemas", () => {
         title: "Port-to-port tunnel",
         number: "US20240430231A1",
         description: "Secure remote access.",
-        order: 1,
       }),
     ).toThrow();
-  });
-
-  it("contains only the approved repositories", () => {
-    expect(PROJECT_ALLOWLIST).toEqual([
-      "create-typesense-app",
-      "react-wsx",
-      "google-street-view-clone",
-      "ios-http-server",
-      "react-speedtest",
-      "webkitgtk-kiosk-app",
-    ]);
   });
 });

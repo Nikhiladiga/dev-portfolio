@@ -1,19 +1,15 @@
 import { z } from "astro/zod";
 
 const httpsUrl = z
-  .string()
   .url()
   .refine((value) => value.startsWith("https://"), "URL must use HTTPS");
 
 export const projectSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
-  repository: z.string().min(1),
   repositoryUrl: httpsUrl,
   demoUrl: httpsUrl.optional(),
   technologies: z.array(z.string().min(1)).min(1),
-  order: z.number().int().positive(),
-  showStats: z.boolean().default(true),
 });
 
 export const ossSchema = z.object({
@@ -21,7 +17,6 @@ export const ossSchema = z.object({
   role: z.string().min(1),
   description: z.string().min(1),
   url: httpsUrl,
-  order: z.number().int().positive(),
 });
 
 export const patentSchema = z.object({
@@ -29,7 +24,18 @@ export const patentSchema = z.object({
   number: z.string().min(1),
   description: z.string().min(1),
   url: httpsUrl,
-  order: z.number().int().positive(),
+});
+
+export const repositoryStatsSchema = z.object({
+  id: z.string().min(1),
+  stars: z.number().int().nonnegative(),
+  forks: z.number().int().nonnegative(),
+  watchers: z.number().int().nonnegative(),
+});
+
+export const githubSnapshotSchema = z.object({
+  publicRepositories: z.number().int().nonnegative(),
+  repositories: z.array(repositoryStatsSchema),
 });
 
 export const articleSchema = z.object({

@@ -4,9 +4,10 @@ import ExternalLinkIcon from "../ui/ExternalLinkIcon.astro";
 
 interface Props {
   articles: Article[];
+  moreUrl: string;
 }
 
-const { articles } = Astro.props;
+const { articles, moreUrl } = Astro.props;
 const formatDate = (date: Date) => new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(date);
 ---
 
@@ -14,7 +15,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en", { day: "2-digit
   <div class="site-container">
     <div class="mb-10 grid gap-5 md:grid-cols-[1fr_1fr] md:items-end">
       <div>
-        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">05 / Notes from the work</p>
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">06 / Notes from the work</p>
         <h2 id="writing-title" class="mt-2 font-display text-5xl uppercase leading-none sm:text-7xl">Writing</h2>
       </div>
       <p class="prose-width text-lg text-muted-foreground md:justify-self-end">Practical notes on AI interfaces, infrastructure, developer workflows, and things worth building twice.</p>
@@ -39,5 +40,11 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en", { day: "2-digit
         </li>
       ))}
     </ol>
+
+    <div class="mt-8 flex justify-end">
+      <a href={moreUrl} target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 font-head text-lg font-bold underline decoration-2 underline-offset-4 hover:bg-primary hover:text-primary-foreground">
+        See all articles <ExternalLinkIcon />
+      </a>
+    </div>
   </div>
 </section>

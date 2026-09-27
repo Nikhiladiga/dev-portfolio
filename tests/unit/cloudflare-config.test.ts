@@ -15,17 +15,25 @@ describe("Cloudflare deployment contract", () => {
 
   it("uploads to Cloudflare Pages instead of creating a Worker", () => {
     const workflow = readFileSync(
-      new URL(".github/workflows/refresh-content.yml", root),
+      new URL(".github/workflows/ci.yml", root),
       "utf8",
     );
+    expect(workflow).toContain("schedule:");
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("npm run content:refresh");
     expect(workflow).toContain("cloudflare/wrangler-action@v4");
     expect(workflow).toContain("deployments: write");
     expect(workflow).toContain(
       "command: pages deploy dist --project-name nikhiladiga --branch ${{ github.head_ref || github.ref_name }}",
     );
     expect(workflow).toContain("gitHubToken: ${{ secrets.GITHUB_TOKEN }}");
+    expect(workflow).toContain('PLAYWRIGHT_REUSE_BUILD: "1"');
+    expect(workflow).not.toContain("npm run build:site");
     expect(workflow).not.toMatch(/^\s+command: deploy\s*$/m);
     expect(workflow).not.toContain("gh-pages");
+    expect(
+      existsSync(new URL(".github/workflows/refresh-content.yml", root)),
+    ).toBe(false);
     expect(existsSync(new URL(".github/workflows/deploy.yml", root))).toBe(false);
   });
 

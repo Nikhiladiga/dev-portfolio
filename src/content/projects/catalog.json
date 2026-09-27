@@ -3,62 +3,44 @@
     "id": "create-typesense-app",
     "title": "Create Typesense App",
     "description": "A CLI that scaffolds a complete typo-tolerant search UI with Next.js, React InstantSearch, Typesense, Docker, and seeded sample data.",
-    "repository": "create-typesense-app",
     "repositoryUrl": "https://github.com/Nikhiladiga/create-typesense-app",
     "demoUrl": "https://www.npmjs.com/package/create-typesense-app",
-    "technologies": ["TypeScript", "Next.js", "Typesense", "Docker"],
-    "order": 1,
-    "showStats": true
+    "technologies": ["TypeScript", "Next.js", "Typesense", "Docker"]
   },
   {
     "id": "react-wsx",
     "title": "React WSX",
     "description": "A typed React WebSocket component with connection lifecycle callbacks and configurable automatic reconnection.",
-    "repository": "react-wsx",
     "repositoryUrl": "https://github.com/Nikhiladiga/react-wsx",
     "demoUrl": "https://www.npmjs.com/package/react-wsx",
-    "technologies": ["React", "TypeScript", "WebSocket", "npm"],
-    "order": 2,
-    "showStats": true
+    "technologies": ["React", "TypeScript", "WebSocket", "npm"]
   },
   {
     "id": "google-street-view-clone",
     "title": "Google Street View Clone",
     "description": "A Google Street View clone built with React and react-photo-sphere-viewer.",
-    "repository": "google-street-view-clone",
     "repositoryUrl": "https://github.com/Nikhiladiga/google-street-view-clone",
-    "technologies": ["React", "JavaScript", "react-photo-sphere-viewer"],
-    "order": 3,
-    "showStats": true
+    "technologies": ["React", "JavaScript", "react-photo-sphere-viewer"]
   },
   {
     "id": "ios-http-server",
     "title": "iOS HTTP Server",
     "description": "A demonstration of running a lightweight HTTP server on iOS with Telegraph.",
-    "repository": "ios-http-server",
     "repositoryUrl": "https://github.com/Nikhiladiga/ios-http-server",
-    "technologies": ["Swift", "Telegraph", "iOS"],
-    "order": 4,
-    "showStats": true
+    "technologies": ["Swift", "Telegraph", "iOS"]
   },
   {
     "id": "react-speedtest",
     "title": "React Speedtest",
     "description": "A browser speed test built with React and the ndt7 JavaScript client.",
-    "repository": "react-speedtest",
     "repositoryUrl": "https://github.com/Nikhiladiga/react-speedtest",
-    "technologies": ["React", "JavaScript", "ndt7"],
-    "order": 5,
-    "showStats": true
+    "technologies": ["React", "JavaScript", "ndt7"]
   },
   {
     "id": "webkitgtk-kiosk-app",
     "title": "WebKitGTK Kiosk App",
     "description": "A single-window kiosk application built with WebKitGTK and C++.",
-    "repository": "webkitgtk-kiosk-app",
     "repositoryUrl": "https://github.com/Nikhiladiga/webkitgtk-kiosk-app",
-    "technologies": ["C++", "WebKitGTK", "Linux"],
-    "order": 6,
-    "showStats": true
+    "technologies": ["C++", "WebKitGTK", "Linux"]
   }
 ]

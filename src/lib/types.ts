@@ -1,48 +1,25 @@
-export interface RepositoryStats {
-  stars: number;
-  forks: number;
-  watchers: number;
-}
+import type { z } from "astro/zod";
+import type {
+  articleSchema,
+  githubSnapshotSchema,
+  ossSchema,
+  patentSchema,
+  projectSchema,
+  repositoryStatsSchema,
+} from "../content.schema";
 
-export interface Project {
+export type RepositoryStats = Omit<
+  z.infer<typeof repositoryStatsSchema>,
+  "id"
+>;
+export type Project = z.infer<typeof projectSchema> & {
   id: string;
-  title: string;
-  description: string;
-  repository: string;
-  repositoryUrl: string;
-  demoUrl?: string;
-  technologies: string[];
-  order: number;
-  showStats: boolean;
   stats?: RepositoryStats;
-}
-
-export interface Article {
-  id: string;
-  title: string;
-  url: string;
-  pubDate: Date;
-  tags: string[];
-  readingMinutes?: number;
-}
-
-export interface OpenSourceWork {
-  id: string;
-  title: string;
-  role: string;
-  description: string;
-  url: string;
-  order: number;
-}
-
-export interface Patent {
-  id: string;
-  title: string;
-  number: string;
-  description: string;
-  url: string;
-  order: number;
-}
+};
+export type Article = z.infer<typeof articleSchema>;
+export type OpenSourceWork = z.infer<typeof ossSchema> & { id: string };
+export type Patent = z.infer<typeof patentSchema> & { id: string };
+export type GitHubSnapshot = z.infer<typeof githubSnapshotSchema>;
 
 export interface PortfolioStats {
   publicRepositories: number;

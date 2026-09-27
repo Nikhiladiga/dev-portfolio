@@ -12,6 +12,8 @@ dist
 dist-ssr
 .astro/
 .wrangler/
+.codex/
+.serena/
 playwright-report/
 test-results/
 *.local

@@ -1,7 +1,19 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-test("the page is semantic and free of serious accessibility violations", async ({
+async function seriousViolations(page: Page) {
+  const results = await new AxeBuilder({ page }).analyze();
+  return results.violations
+    .filter(
+      ({ impact }) => impact === "serious" || impact === "critical",
+    )
+    .map(({ id, nodes }) => ({
+      id,
+      targets: nodes.flatMap(({ target }) => target),
+    }));
+}
+
+test("the page exposes semantic navigation and content", async ({
   page,
 }) => {
   await page.goto("/");
@@ -16,39 +28,22 @@ test("the page is semantic and free of serious accessibility violations", async 
   for (const target of targets) {
     await expect(page.locator(target!)).toHaveCount(1);
   }
-
-  const results = await new AxeBuilder({ page }).analyze();
-  const serious = results.violations.filter((violation) =>
-    violation.impact === "serious" || violation.impact === "critical",
-  );
-  expect(
-    serious.map((violation) => ({
-      id: violation.id,
-      targets: violation.nodes.flatMap((node) => node.target),
-    })),
-  ).toEqual([]);
   await expect(page.locator('a[href="/resume.pdf"]')).not.toHaveCount(0);
 });
 
-test("the dark theme has no serious accessibility violations", async ({
-  page,
-}) => {
-  await page.goto("/");
-  await page.evaluate(() => localStorage.setItem("portfolio-theme", "dark"));
-  await page.reload();
+for (const theme of ["light", "dark"] as const) {
+  test(`${theme} theme has no serious accessibility violations`, async ({
+    page,
+  }) => {
+    await page.addInitScript(
+      (value) => localStorage.setItem("portfolio-theme", value),
+      theme,
+    );
+    await page.goto("/");
 
-  const results = await new AxeBuilder({ page }).analyze();
-  const serious = results.violations.filter(
-    (violation) =>
-      violation.impact === "serious" || violation.impact === "critical",
-  );
-  expect(
-    serious.map((violation) => ({
-      id: violation.id,
-      targets: violation.nodes.flatMap((node) => node.target),
-    })),
-  ).toEqual([]);
-});
+    expect(await seriousViolations(page)).toEqual([]);
+  });
+}
 
 test("keyboard focus remains visible on every interactive element", async ({
   page,

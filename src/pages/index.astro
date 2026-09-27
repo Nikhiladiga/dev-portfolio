@@ -5,42 +5,48 @@ import Navigation from "../components/sections/Navigation.astro";
 import Hero from "../components/sections/Hero.astro";
 import Stats from "../components/sections/Stats.astro";
 import TechStack from "../components/sections/TechStack.astro";
+import Experience from "../components/sections/Experience.astro";
 import Projects from "../components/sections/Projects.astro";
 import OpenSource from "../components/sections/OpenSource.astro";
 import PatentSection from "../components/sections/Patent.astro";
 import Articles from "../components/sections/Articles.astro";
 import Footer from "../components/sections/Footer.astro";
-import { NAV_ITEMS, PROFILE, STACK, TOOLING } from "../data/profile";
-import { buildPortfolioData } from "../lib/portfolio-data";
+import { EXPERIENCE, NAV_ITEMS, PROFILE, STACK, TOOLING } from "../data/profile";
 import type { Article, OpenSourceWork, Patent, PortfolioStats, Project } from "../lib/types";
 
-const projects = (await getCollection("projects"))
-  .map(({ id, data }) => ({ id, ...data }))
-  .sort((left, right) => left.order - right.order) satisfies Project[];
+const projects = (await getCollection("projects")).map(({ id, data }) => ({
+  id,
+  ...data,
+})) satisfies Project[];
 
-const openSource = (await getCollection("oss"))
-  .map(({ id, data }) => ({ id, ...data }))
-  .sort((left, right) => left.order - right.order) satisfies OpenSourceWork[];
+const openSource = (await getCollection("oss")).map(({ id, data }) => ({
+  id,
+  ...data,
+})) satisfies OpenSourceWork[];
 
-const patents = (await getCollection("patents"))
-  .map(({ id, data }) => ({ id, ...data }))
-  .sort((left, right) => left.order - right.order) satisfies Patent[];
+const patents = (await getCollection("patents")).map(({ id, data }) => ({
+  id,
+  ...data,
+})) satisfies Patent[];
 
-const fallbackArticles = (await getCollection("articles"))
+const articles = (await getCollection("articles"))
   .map(({ data }) => data)
   .sort((left, right) => right.pubDate.getTime() - left.pubDate.getTime()) satisfies Article[];
 
-const portfolio = await buildPortfolioData({
-  projects,
-  fallbackArticles,
-  fallbackPublicRepos: PROFILE.fallbackPublicRepositories,
-});
+const [{ data: github }] = await getCollection("github");
+const repositoryStats = new Map(
+  github.repositories.map(({ id, ...stats }) => [id, stats]),
+);
+const projectsWithStats = projects.map((project) => ({
+  ...project,
+  stats: repositoryStats.get(project.id),
+}));
 
 const stats: PortfolioStats = {
-  publicRepositories: portfolio.publicRepos,
+  publicRepositories: github.publicRepositories,
   patents: patents.length,
   openSourceProjects: openSource.length,
-  articles: portfolio.articles.length,
+  articles: articles.length,
 };
 ---
 
@@ -53,10 +59,11 @@ const stats: PortfolioStats = {
     <Hero profile={PROFILE} />
     <Stats {stats} />
     <TechStack stack={STACK} tooling={TOOLING} />
-    <Projects projects={portfolio.projects} />
+    <Experience experience={EXPERIENCE} />
+    <Projects projects={projectsWithStats} />
     <OpenSource work={openSource} />
     <PatentSection {patents} />
-    <Articles articles={portfolio.articles} />
+    <Articles {articles} moreUrl={PROFILE.links.medium} />
   </main>
   <Footer profile={PROFILE} />
 </BaseLayout>

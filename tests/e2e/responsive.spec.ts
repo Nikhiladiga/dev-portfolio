@@ -29,3 +29,29 @@ test("long project copy cannot create horizontal page overflow", async ({ page }
   }));
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.viewportWidth);
 });
+
+test("career timeline progresses vertically and alternates across its rail", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/#experience");
+
+  const entries = await page.locator("[data-career-entry]").evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const card = node.querySelector(".career-card");
+      if (!(card instanceof HTMLElement)) {
+        throw new Error("Career entry is missing its card");
+      }
+
+      const rect = card.getBoundingClientRect();
+      return { left: rect.left, top: rect.top };
+    }),
+  );
+
+  expect(entries).toHaveLength(4);
+  for (let index = 1; index < entries.length; index += 1) {
+    expect(entries[index].top).toBeGreaterThan(entries[index - 1].top);
+  }
+  expect(entries[0].left).toBeLessThan(entries[1].left);
+  expect(entries[2].left).toBeLessThan(entries[3].left);
+});

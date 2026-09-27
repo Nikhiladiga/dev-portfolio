@@ -1,5 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const previewCommand = "npm run preview -- --host 127.0.0.1 --port 4321";
+const webServerCommand =
+  process.env.PLAYWRIGHT_REUSE_BUILD === "1"
+    ? previewCommand
+    : `SITE_URL=https://nikhiladiga.pages.dev npm run build:site && ${previewCommand}`;
+
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
@@ -8,8 +14,7 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: {
-    command:
-      "PORTFOLIO_OFFLINE=1 SITE_URL=https://nikhiladiga.pages.dev npm run build:site && npm run preview -- --host 127.0.0.1 --port 4321",
+    command: webServerCommand,
     url: "http://127.0.0.1:4321",
     reuseExistingServer: !process.env.CI,
   },

@@ -1,16 +1,27 @@
 name: CI
 
 on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
   pull_request:
   push:
     branches: [master]
 
+concurrency:
+  group: cloudflare-pages-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
+  deployments: write
 
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://nikhiladiga.pages.dev
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -24,17 +35,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Refresh external content snapshots
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npm run content:refresh
+
       - name: Check Astro and TypeScript
         run: npm run check
 
       - name: Run unit and build tests
         run: npm test
 
-      - name: Build deterministic static output
-        run: PORTFOLIO_OFFLINE=1 npm run build:site
-
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
       - name: Run browser tests
+        env:
+          PLAYWRIGHT_REUSE_BUILD: "1"
         run: npm run test:e2e
+
+      - name: Deploy to Cloudflare Pages
+        if: github.event_name != 'pull_request'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name nikhiladiga --branch ${{ github.head_ref || github.ref_name }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

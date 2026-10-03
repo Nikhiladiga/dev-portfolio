@@ -13,7 +13,7 @@ export function buildSite(): void {
       NODE_OPTIONS: [process.env.NODE_OPTIONS, `--require=${networkGuard}`]
         .filter(Boolean)
         .join(" "),
-      SITE_URL: "https://nikhiladiga.pages.dev",
+      SITE_URL: "https://nikhiladiga.in",
     },
     stdio: "pipe",
   });

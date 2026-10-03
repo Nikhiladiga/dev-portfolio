@@ -1,4 +1,4 @@
-const expected = "https://nikhiladiga.pages.dev";
+const expected = "https://nikhiladiga.in";
 
 if (process.env.SITE_URL && process.env.SITE_URL !== expected) {
   console.error(

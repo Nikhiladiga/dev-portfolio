@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const site = Astro.site ?? new URL("https://nikhiladiga.pages.dev");
+const site = Astro.site ?? new URL("https://nikhiladiga.in");
 const canonical = new URL(Astro.url.pathname, site);
 const socialImage = absoluteUrl("/og.png", site);
 const personId = absoluteUrl("/#person", site);
@@ -33,7 +33,7 @@ const structuredData = JSON.stringify({
       "@type": "WebSite",
       "@id": websiteId,
       name: PROFILE.name,
-      alternateName: [`${PROFILE.name} Portfolio`, "nikhiladiga.pages.dev"],
+      alternateName: [`${PROFILE.name} Portfolio`, "nikhiladiga.in"],
       url: site.href,
       author: { "@id": personId },
     },

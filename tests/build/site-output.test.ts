@@ -118,16 +118,16 @@ it("uses crawlable links, local SVG icons, and optimized portraits", () => {
 it("ships metadata and structured identity", () => {
   expect($("title").text()).toBe("Nikhil Adiga — Software Engineer");
   expect($('link[rel="canonical"]').attr("href")).toBe(
-    "https://nikhiladiga.pages.dev/",
+    "https://nikhiladiga.in/",
   );
   expect($('meta[property="og:image"]').attr("content")).toBe(
-    "https://nikhiladiga.pages.dev/og.png",
+    "https://nikhiladiga.in/og.png",
   );
   expect($('meta[name="twitter:card"]').attr("content")).toBe(
     "summary_large_image",
   );
   expect($('link[type="application/rss+xml"]').attr("href")).toBe(
-    "https://nikhiladiga.pages.dev/rss.xml",
+    "https://nikhiladiga.in/rss.xml",
   );
 
   const jsonLd = JSON.parse(
@@ -168,13 +168,36 @@ it("copies fixed crawl and sharing assets into the build", () => {
     height: 630,
   });
   expect(readFileSync("dist/robots.txt", "utf8")).toContain(
-    "Sitemap: https://nikhiladiga.pages.dev/sitemap-index.xml",
+    "Sitemap: https://nikhiladiga.in/sitemap-index.xml",
   );
   expect(readFileSync("dist/rss.xml", "utf8")).toContain("<rss");
   expect(readFileSync("dist/sitemap-index.xml", "utf8")).toContain(
-    "https://nikhiladiga.pages.dev/",
+    "https://nikhiladiga.in/",
   );
   expect(statSync("dist/og.png").size).toBeGreaterThan(10_000);
+});
+
+it("keeps generated site URLs on the custom domain", () => {
+  for (const path of [
+    "dist/index.html",
+    "dist/robots.txt",
+    "dist/rss.xml",
+    "dist/sitemap-index.xml",
+    "dist/sitemap-0.xml",
+  ]) {
+    expect(readFileSync(path, "utf8")).not.toMatch(
+      /nikhiladiga\.pages\.dev|dev-portfolio\.nikhiladigaz\.workers\.dev/,
+    );
+  }
+  expect($('meta[property="og:url"]').attr("content")).toBe(
+    "https://nikhiladiga.in/",
+  );
+  expect($('link[rel="sitemap"]').attr("href")).toBe(
+    "https://nikhiladiga.in/sitemap-index.xml",
+  );
+  expect(readFileSync("dist/sitemap-0.xml", "utf8")).toContain(
+    "<loc>https://nikhiladiga.in/</loc>",
+  );
 });
 
 it("ships a native theme control without framework islands", () => {

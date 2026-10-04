@@ -20,7 +20,7 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: https://nikhiladiga.pages.dev
+      SITE_URL: https://nikhiladiga.in
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout

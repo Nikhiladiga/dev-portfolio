@@ -177,6 +177,29 @@ it("copies fixed crawl and sharing assets into the build", () => {
   expect(statSync("dist/og.png").size).toBeGreaterThan(10_000);
 });
 
+it("keeps generated site URLs on the custom domain", () => {
+  for (const path of [
+    "dist/index.html",
+    "dist/robots.txt",
+    "dist/rss.xml",
+    "dist/sitemap-index.xml",
+    "dist/sitemap-0.xml",
+  ]) {
+    expect(readFileSync(path, "utf8")).not.toMatch(
+      /nikhiladiga\.pages\.dev|dev-portfolio\.nikhiladigaz\.workers\.dev/,
+    );
+  }
+  expect($('meta[property="og:url"]').attr("content")).toBe(
+    "https://nikhiladiga.in/",
+  );
+  expect($('link[rel="sitemap"]').attr("href")).toBe(
+    "https://nikhiladiga.in/sitemap-index.xml",
+  );
+  expect(readFileSync("dist/sitemap-0.xml", "utf8")).toContain(
+    "<loc>https://nikhiladiga.in/</loc>",
+  );
+});
+
 it("ships a native theme control without framework islands", () => {
   expect($("astro-island")).toHaveLength(0);
   expect($("[data-theme-toggle]")).toHaveLength(1);
